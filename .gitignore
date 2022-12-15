@@ -1,0 +1,6 @@
+*.o
+out_*
+*.class
+*.jar
+a.out
+*.opp
