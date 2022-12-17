@@ -50,7 +50,7 @@ all: $(NAME)
 
 $(NAME): $(OUT)
 	@echo -e "$(_PURPLE)Linking $(NAME)$(_COLOR_RESET)"
-	@gcc $(OUT) -o $(NAME)
+	@gcc $(OUT) -o $(NAME) -g
 	@echo -e "$(_GREEN)DONE$(_COLOR_RESET)"
 
 verify: $(NAME)
