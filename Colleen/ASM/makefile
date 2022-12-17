@@ -32,7 +32,6 @@ _COLOR_RESET	= \e[0m
 
 NAME = Colleen
 
-
 CC = nasm
 
 UNAME_S = $(shell uname -s)

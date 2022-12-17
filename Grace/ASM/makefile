@@ -30,24 +30,32 @@ _IWHITE			= \x1b[47m
 # Color reset
 _COLOR_RESET	= \e[0m
 
-NAME = Colleen
+NAME = Grace
 
-SRC = Colleen.c
-OUT = $(patsubst %.c, %.o, $(SRC))
+CC = nasm
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+UNAME_S = $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    CFLAGS = -f elf64
+	SRC = Grace_linux.s
+endif
+ifeq ($(UNAME_S),Darwin)
+    CFLAGS = -f macho64
+	SRC = Grace_macos.s
+endif
+
+OUT = $(patsubst %.s, %.o, $(SRC))
 
 all: $(NAME)
 
 $(NAME): $(OUT)
 	@echo -e "$(_PURPLE)Linking $(NAME)$(_COLOR_RESET)"
-	@$(CC) $(CFLAGS) $(OUT) -o $(NAME)
+	@gcc $(OUT) -o $(NAME)
 	@echo -e "$(_GREEN)DONE$(_COLOR_RESET)"
 
 verify: $(NAME)
-	@./$(NAME) > out_$(NAME)
-	@if diff $(SRC) out_$(NAME) > /dev/null; then \
+	@ ./$(NAME)
+	@ if diff $(SRC) Grace_kid.s > /dev/null; then \
 		echo -e "$(_GREEN)$(NAME) is a Quine!$(_COLOR_RESET)"; \
 	else \
 		echo -e "$(_RED)$(NAME) is not a Quine!$(_COLOR_RESET)"; \
@@ -55,7 +63,7 @@ verify: $(NAME)
 
 $(OUT): $(SRC)
 	@echo -e "$(_CYAN)Compiling $(basename $(notdir $(SRC))) $(_COLOR_RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $< -o $@
 
 re: fclean
 	@make $(NAME)
@@ -63,7 +71,7 @@ re: fclean
 fclean: clean
 	@echo -e "$(_RED)Cleaning compiled binary files$(_COLOR_RESET)"
 	@rm -rf $(NAME)
-	@rm -rf out_$(NAME)
+	@rm -rf Grace_kid.s
 
 clean:
 	@echo -e "$(_RED)Cleaning object files$(_COLOR_RESET)"

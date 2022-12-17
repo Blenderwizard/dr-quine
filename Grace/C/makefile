@@ -30,10 +30,12 @@ _IWHITE			= \x1b[47m
 # Color reset
 _COLOR_RESET	= \e[0m
 
-NAME = Colleen
+NAME = Grace
 
-SRC = Colleen.c
+SRC = Grace.c
 OUT = $(patsubst %.c, %.o, $(SRC))
+
+OUTFILE = Grace_kid.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -46,8 +48,8 @@ $(NAME): $(OUT)
 	@echo -e "$(_GREEN)DONE$(_COLOR_RESET)"
 
 verify: $(NAME)
-	@./$(NAME) > out_$(NAME)
-	@if diff $(SRC) out_$(NAME) > /dev/null; then \
+	@./$(NAME)
+	@if diff $(SRC) $(OUTFILE) > /dev/null; then \
 		echo -e "$(_GREEN)$(NAME) is a Quine!$(_COLOR_RESET)"; \
 	else \
 		echo -e "$(_RED)$(NAME) is not a Quine!$(_COLOR_RESET)"; \
@@ -63,7 +65,7 @@ re: fclean
 fclean: clean
 	@echo -e "$(_RED)Cleaning compiled binary files$(_COLOR_RESET)"
 	@rm -rf $(NAME)
-	@rm -rf out_$(NAME)
+	@rm -rf $(OUTFILE)
 
 clean:
 	@echo -e "$(_RED)Cleaning object files$(_COLOR_RESET)"

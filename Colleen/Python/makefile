@@ -43,11 +43,3 @@ verify: $(NAME).py
 fclean:
 	@echo -e "$(_RED)Cleaning compiled binary files$(_COLOR_RESET)"
 	@rm -rf out_$(NAME)
-
-
-
-
-
-	
-
-

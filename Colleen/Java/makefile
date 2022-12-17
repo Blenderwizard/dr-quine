@@ -69,10 +69,3 @@ fclean: clean
 clean:
 	@echo -e "$(_RED)Cleaning object files$(_COLOR_RESET)"
 	@rm -rf $(OUT)
-
-
-
-
-	
-
-
