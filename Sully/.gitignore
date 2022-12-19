@@ -1,5 +1,6 @@
 Sully_*
 Sully
+Rust/target
 
 !Sully_linux.s
 !Sully_macos.s
