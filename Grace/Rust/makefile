@@ -30,24 +30,24 @@ _IWHITE			= \x1b[47m
 # Color reset
 _COLOR_RESET	= \e[0m
 
-NAME = Colleen
+NAME = Grace
 
-SRC = Colleen.cpp
-OUT = $(patsubst %.cpp, %.opp, $(SRC))
+SRC = ./src/main.rs
 
-CC = g++
-CFLAGS = -Wall -Wextra -Werror
+CC = cargo
+CFLAGS = build -r
 
 all: $(NAME)
 
 $(NAME): $(OUT)
-	@echo -e "$(_PURPLE)Linking $(NAME)$(_COLOR_RESET)"
-	@$(CC) $(CFLAGS) $(OUT) -o $(NAME)
+	@echo -e "$(_PURPLE)Compiling $(NAME)$(_COLOR_RESET)"
+	@$(CC) $(CFLAGS)
+	@mv ./target/release/$(NAME) ./$(NAME)
 	@echo -e "$(_GREEN)DONE$(_COLOR_RESET)"
 
 verify: $(NAME)
-	@./$(NAME) > out_$(NAME)
-	@if diff $(SRC) out_$(NAME) > /dev/null; then \
+	@./$(NAME)
+	@if diff $(SRC) Grace_kid.rs > /dev/null; then \
 		echo -e "$(_GREEN)$(NAME) is a Quine!$(_COLOR_RESET)"; \
 	else \
 		echo -e "$(_RED)$(NAME) is not a Quine!$(_COLOR_RESET)"; \
@@ -60,11 +60,8 @@ $(OUT): $(SRC)
 re: fclean
 	@make $(NAME)
 
-fclean: clean
-	@echo -e "$(_RED)Cleaning compiled binary files$(_COLOR_RESET)"
+fclean:
+	@echo -e "$(_RED)Cleaning compiled code$(_COLOR_RESET)"
 	@rm -rf $(NAME)
-	@rm -rf out_$(NAME)
-
-clean:
-	@echo -e "$(_RED)Cleaning object files$(_COLOR_RESET)"
-	@rm -rf $(OUT)
+	@rm -rf Grace_kid.rs
+	@rm -rf target
