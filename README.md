@@ -1,5 +1,5 @@
 <h1 align="center" style="border-bottom: none; margin-bottom: 0;">
-    ft_containers: By <a href="https://github.com/Blenderwizard">Jolan "Blenderwizard" Rathelot</a>
+    Dr-quine: By <a href="https://github.com/Blenderwizard">Jolan "Blenderwizard" Rathelot</a>
 </h1>
 
 
