@@ -89,7 +89,7 @@ re: fclean
 fclean: clean
 	@echo $(E) "$(_RED)Cleaning compiled binary files$(_COLOR_RESET)"
 	@rm -rf $(NAME)
-	@rm -rf Sully_0.s Sully_1 Sully_1.s Sully_2 Sully_2.s Sully_3 Sully_3.s Sully_4 Sully_4.s Sully_0.o Sully_1.o Sully_2.o Sully_3.o Sully_4.o Sully_0
+	@rm -rf Sully_0.s Sully_1 Sully_1.s Sully_2 Sully_2.s Sully_3 Sully_3.s Sully_4 Sully_4.s Sully_0 Sully_5 Sully_5.s
 
 clean:
 	@echo $(E) "$(_RED)Cleaning object files$(_COLOR_RESET)"

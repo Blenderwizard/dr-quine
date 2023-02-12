@@ -70,5 +70,5 @@ re: fclean
 fclean:
 	@echo $(E) "$(_RED)Cleaning compiled code$(_COLOR_RESET)"
 	@rm -rf $(NAME)
-	@rm -rf Sully_0.rs Sully_1.rs Sully_2.rs Sully_3.rs Sully_4.rs Sully_1 Sully_2 Sully_3 Sully_4 Sully_0
+	@rm -rf Sully_0.rs Sully_1.rs Sully_2.rs Sully_3.rs Sully_4.rs Sully_1 Sully_2 Sully_3 Sully_4 Sully_0 Sully_5 Sully_5.rs
 	@rm -rf target
