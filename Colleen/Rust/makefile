@@ -1,6 +1,6 @@
 NAME = Colleen
 
-SRC = ./src/main.rs
+SRC = Colleen.rs
 
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -54,15 +54,14 @@ ifeq ($(UNAME_S),Darwin)
 	_COLOR_RESET	= \033[0m
 endif
 
-CC = cargo
-CFLAGS = build -r
+CC = rustc
+CFLAGS = -O
 
 all: $(NAME)
 
-$(NAME): $(OUT)
+$(NAME): $(SRC)
 	@echo $(E) "$(_PURPLE)Compiling $(NAME)$(_COLOR_RESET)"
-	@$(CC) $(CFLAGS)
-	@mv ./target/release/Colleen ./Colleen
+	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 	@echo $(E) "$(_GREEN)DONE$(_COLOR_RESET)"
 
 verify: $(NAME)
@@ -73,10 +72,6 @@ verify: $(NAME)
 		echo $(E) "$(_RED)$(NAME) is not a Quine!$(_COLOR_RESET)"; \
 	fi
 
-$(OUT): $(SRC)
-	@echo $(E) "$(_CYAN)Compiling $(basename $(notdir $(SRC))) $(_COLOR_RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
-
 re: fclean
 	@make $(NAME)
 
@@ -84,4 +79,3 @@ fclean:
 	@echo $(E) "$(_RED)Cleaning compiled code$(_COLOR_RESET)"
 	@rm -rf $(NAME)
 	@rm -rf out_$(NAME)
-	@rm -rf target

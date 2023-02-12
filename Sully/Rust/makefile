@@ -1,9 +1,9 @@
 NAME = Sully
 
-SRC = ./src/main.rs
+SRC = Sully.rs
 
-CC = cargo
-CFLAGS = build -r
+CC = rustc
+CFLAGS = -O
 
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -59,15 +59,10 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OUT)
+$(NAME): $(SRC)
 	@echo $(E) "$(_PURPLE)Compiling $(NAME)$(_COLOR_RESET)"
-	@$(CC) $(CFLAGS)
-	@mv ./target/release/$(NAME) ./$(NAME)
+	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 	@echo $(E) "$(_GREEN)DONE$(_COLOR_RESET)"
-
-$(OUT): $(SRC)
-	@echo $(E) "$(_CYAN)Compiling $(basename $(notdir $(SRC))) $(_COLOR_RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
 
 re: fclean
 	@make $(NAME)
