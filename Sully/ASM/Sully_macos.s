@@ -8,7 +8,7 @@ global _main
 _main:
     push rbp
     mov rbp, rsp
-    mov r12, -1
+    mov r12, 5
     cmp r12, 0
     jle __label_end
 %ifdef FIRST
